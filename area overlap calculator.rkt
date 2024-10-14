@@ -1,14 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname bonus-a03) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor mixed-fraction #f #t none #f () #t)))
-;;
-;;********************************************
-;;     Mohammadamin Sedaghat(21132158)
-;;     CS 135 Fall 2024 Section 007
-;;     Assignment A03, Problem 5
-;;********************************************
-;;
-
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |area overlap calculator|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor mixed-fraction #f #t none #f () #t)))
 (define-struct box (xmin xmax ymin ymax))
 ;;A Box is a (make-box Num Num Num Num)
 ;;Recquires:
