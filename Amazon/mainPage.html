@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="items.css">
     <link rel="stylesheet" href="overall.css">
+    <link rel="stylesheet" href="header.css">
     <title>Amazon</title>
 </head>
 <body>
+    <header>
+        <div class="logo-container">
+            <a>
+                <img src="images/icon/amazon-logo-white.png" class="logo">
+            </a>
+        </div>
+
+        <div class="middle-section">
+            <input placeholder="Search" class="search-bar">
+            <button class="search-button">
+                <img src="images/icon/search-icon.png" class="search-pic">
+            </button>
+        </div>
+
+        <div class="right-section">
+            <a class="returns-and-orders headers-link">
+                <span class="returns">Returns</span>
+                <span class="orders">& Orders</span>
+            </a>
+
+            <a class="cart-container">
+                <img src="images/icon/cart-icon.png" class="cart">
+            </a>
+        </div>
+    </header>
     <div class="main">
         <div class="item-box">
-            <img src="images/items/athletic-cotton-socks-6-pairs.jpg" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/athletic-cotton-socks-6-pairs.jpg" class="item-picture">
+            </div>
             <div class="item-text">Black and Gray Athletic Cotton Socks - 6 Pairs</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-45.png" class="item-rating">
@@ -32,7 +60,9 @@
         </div>
 
         <div class="item-box">
-            <img src="images/items/intermediate-composite-basketball.jpg" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/intermediate-composite-basketball.jpg" class="item-picture">
+            </div>
             <div class="item-text">Intermediate Size Basketball</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-4.png" class="item-rating">
@@ -54,7 +84,9 @@
         </div>
 
         <div class="item-box">
-            <img src="images/items/adults-plain-cotton-tshirt-2-pack-teal.jpg" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/adults-plain-cotton-tshirt-2-pack-teal.jpg" class="item-picture">
+            </div>
             <div class="item-text">Adults Plain Cotton T-Shirt - 2 Pack</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-45.png" class="item-rating">
@@ -76,7 +108,9 @@
         </div>
 
         <div class="item-box">
-            <img src="images/items/black-2-slot-toaster.jpg" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/black-2-slot-toaster.jpg" class="item-picture">
+            </div>
             <div class="item-text">2 Slot Toaster - Black</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-5.png" class="item-rating">
@@ -98,7 +132,9 @@
         </div>
 
         <div class="item-box">
-            <img src="images/items/6-piece-white-dinner-plate-set.jpg" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/6-piece-white-dinner-plate-set.jpg" class="item-picture">
+            </div>
             <div class="item-text">6 Piece White Dinner Plate Set</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-4.png" class="item-rating">
@@ -120,7 +156,9 @@
         </div>
 
         <div class="item-box">
-            <img src="images/items/6-piece-non-stick-baking-set.webp" class="item-picture">
+            <div class="image-container">
+                <img src="images/items/6-piece-non-stick-baking-set.webp" class="item-picture">
+            </div>
             <div class="item-text">6-Piece Nonstick, Carbon Steel Oven Bakeware Baking Set</div>
             <div class="review-container"> 
                 <img src="images/rating/rating-45.png" class="item-rating">
@@ -140,5 +178,6 @@
             </select>
             <button class="add-to-cart-button">Add to Cart</button>
         </div>
+    </div>
 </body>
 </html>
