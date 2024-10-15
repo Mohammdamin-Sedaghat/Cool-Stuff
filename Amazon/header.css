@@ -86,6 +86,10 @@ header{
     font-size: 14px;
 }
 
+.returns-and-orders:hover {
+    border: 1px solid grey;
+}
+
 .returns {
     display: block;
     font-size: 13px;
@@ -107,7 +111,6 @@ header{
     margin-right: 20px;
     cursor: pointer;
     text-decoration: none;
-    border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .cart-counter {
