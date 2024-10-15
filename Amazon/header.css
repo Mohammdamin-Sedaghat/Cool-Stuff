@@ -14,6 +14,7 @@ header{
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .headers-link {
     display: inline-block;
     padding: 6px;
@@ -101,6 +102,33 @@ header{
 }
 
 .cart-container {
-    display: relative;
-    height: 50px;
+    position: relative;
+    height: 60px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.cart-counter {
+    width: auto;
+    position: fixed;
+
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(240, 136, 4);
+
+    top: 0px;
+    right: 48px;
+    margin-top: 8px;
+}
+
+.cart-text {
+    position: fixed;
+
+    font-weight: 700;
+    font-size: 16px;
+    top: 10px;
+    right: 6px;
+
 }
