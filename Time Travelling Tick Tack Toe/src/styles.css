@@ -1,0 +1,24 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  font-weight: 560;
+  font-size: 16px;
+}
+
+.ourGrid {
+  display: grid;
+  grid-template-columns: 30px 30px 30px;
+}
+
+.resetButton {
+  margin-top: 20px;
+}
+
+.turn {
+  margin-bottom: 10px;
+}
