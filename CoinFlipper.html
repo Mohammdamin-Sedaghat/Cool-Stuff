@@ -6,8 +6,8 @@
     <title>Coin Flipper</title>
     <style>
         body {
-            background-color: black;
-            color: Yellow;
+            background-color: rgb(134, 130, 230);
+            color: rgb(38, 52, 243);
             font-family: Arial, Helvetica, sans-serif;
             display: flex;
             flex-direction: column;
@@ -26,48 +26,100 @@
             transform: skewX(-2deg) translateY(-2px);
         }
 
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: rgb(30, 61, 202);
+            color: rgb(211, 209, 251);
+            border: none;
+            border-radius: 2px;
+            margin-right: 5px;
+            width: 90px;
+            padding: 5px;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: rgb(15, 42, 163);
+            box-shadow: 0px 0px 3px rgb(12, 7, 150);
+        }
+
+        button:active {
+            background-color: rgb(8, 25, 104);
+            box-shadow: inset 0px 0px 3px rgb(12, 7, 150);
+        }
+
         #userGuess {
             font-size: 20px;
             padding: 5px;
+            color: rgb(39, 30, 196);
         }
 
         #result {
             visibility: hidden;
-            color: rgb(221, 221, 85);
+            color: rgb(61, 41, 213);
             margin-top: 20px;
             font-size: 20px;
+        }
+
+        #score {
+            margin-top: 5px;
+            font-size: 18px;
+        }
+
+        #reset {
+            width: 150px;
         }
     </style>
 </head>
 <body>
     <h3 class="text">Coin Flip</h3>
-    <input type="text" placeholder="heads or tails?" id="userGuess" name="useGuess" onkeydown="flipMyCoin(event)">
+    <input type="text" placeholder="heads or tails?" id="userGuess" name="useGuess" onkeydown="event.key === 'Enter' && flipMyCoin(value)">
+    <div class="button-container">
+        <button onclick="flipMyCoin('heads')">Heads</button>
+        <button onClick="flipMyCoin('tails')">Tails</button>
+    </div>
+    <div id="score"></div>
     <div id="result">Fat</div>
+    <button id="reset" onClick="reset()">reset Score</button>
     <script>
         textBox = document.getElementById("userGuess");
+        const score = JSON.parse(localStorage.getItem('score')) ||  {wins: 0, losses: 0};
+        document.getElementById("score").innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}`;
 
-        function flipMyCoin(event) {
-            if (event.key === "Enter") {
-                let userGuess = textBox.value === "heads" ? 1 : textBox.value === "tails" ? 0.5: 20;
-                let result;
-                const computerChoice = Math.random();
-                // console.log(computerChoice >= 0.5 ? "head" : "tail");
-                if (userGuess === 20) {
-                    result = "please input lowerCase valid inputs only!";
-                } else if ((userGuess - computerChoice >= 0) && (userGuess - computerChoice < 0.5)) {
-                    console.log(`Good Job: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`);
-                    result = `Good Job: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`;
-                } else {
-                    console.log(`Sadge: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`);
-                    result = `Sadge: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`;
-                }
-                document.getElementById("result").innerHTML = result;
-                document.getElementById("result").style.visibility = "visible";
-                textBox.value = "";
+        function flipMyCoin(value) {
+            let userGuess = value === "heads" ? 1 : value === "tails" ? 0.5: 20;
+            let result;
+            const computerChoice = Math.random();
+            // console.log(computerChoice >= 0.5 ? "head" : "tail");
+            if (userGuess === 20) {
+                result = "please input lowerCase valid inputs only!";
+            } else if ((userGuess - computerChoice >= 0) && (userGuess - computerChoice < 0.5)) {
+                //console.log(`Good Job: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`);
+                result = `Good Job: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`;
+                score.wins += 1;
+            } else {
+                //console.log(`Sadge: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`);
+                result = `Sadge: Result is: ${computerChoice >= 0.5 ? "head" : "tail"}`;
+                score.losses += 1;
             }
-            
+            document.getElementById("result").innerHTML = result;
+            document.getElementById("result").style.visibility = "visible";
+            document.getElementById("score").innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}`;
+            localStorage.setItem('score', JSON.stringify(score));
+            textBox.value = "";
         };
+
         
+        function reset() {
+            localStorage.removeItem('score');
+            score.wins = 0;
+            score.losses = 0;
+            document.getElementById("score").innerHTML = `Wins: 0, Losses: 0`;
+            document.getElementById("result").style.visibility = "hidden";
+        }
     </script>
 </body>
 </html>
