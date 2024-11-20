@@ -1,0 +1,53 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.choices-container {
+    display: grid;
+    grid-template-columns: 65px 65px 65px 65px;
+    row-gap: 20px;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    border: none;
+
+    color: white;
+    font-size: 25px;
+    background-color: rgba(69, 69, 69, 0.8);
+}
+
+button:hover {
+    background-color: rgb(88, 88, 88);
+}
+
+.operation {
+    background-color: orange;
+}
+
+.operation:hover {
+    background-color: rgb(252, 178, 41);
+}
+
+.clear {
+    font-size: 20px;
+}
+
+p {
+    font-size: 25px;
+    height: 40px;
+    width: 245px;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hides scrollbar in IE and Edge */
+    line-height: 40px;
+    border: 2px solid rgb(72, 71, 71);
+    padding-left: 5px;
+    white-space: nowrap;
+    text-align: left;
+}
