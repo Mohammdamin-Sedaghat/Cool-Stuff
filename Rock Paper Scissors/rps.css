@@ -18,6 +18,17 @@ body {
     border: 2px solid white;
     margin-right: 10px;
     cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.choice:hover {
+    /* background-color: rgba(65, 65, 65, 0.5); */
+    transform: translateY(-2px);
+}
+
+.choice:active {
+    transform: translateY(2px) translateX(2px);
+    background-color: rgb(45, 45, 45);
 }
 
 #wlt {
