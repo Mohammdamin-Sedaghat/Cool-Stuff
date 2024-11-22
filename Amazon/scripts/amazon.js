@@ -1,30 +1,3 @@
-const products = [{
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-    rating: {
-        stars: 45,
-        count: 87,
-    },
-    priceCentes: 1090,
-
-}, {
-    image: "images/products/intermediate-composite-basketball.jpg",
-    name: "Intermediate Size Basketball",
-    rating: {
-        stars: 40,
-        count: 127,
-    },
-    priceCentes: 2095,
-}, {
-    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
-    name: "Adults Plain Cotton T-Shirt - 2 Pack",
-    rating: {
-        stars: 45,
-        count: 56,
-    },
-    priceCentes: 799,
-}];
-
 let prodcutContainerElem = document.querySelector('.products-grid');
 let productsHTML = "";
 products.forEach((item, index) => {
@@ -41,14 +14,14 @@ products.forEach((item, index) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${item.rating.stars}.png">
+              src="images/ratings/rating-${item.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
               ${item.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${item.priceCentes / 100}
+            $${item.priceCents / 100}
           </div>
 
           <div class="product-quantity-container">
