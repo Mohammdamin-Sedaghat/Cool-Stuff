@@ -67,7 +67,7 @@ let isPlaying = false;
 let autoPlayer;
 function autoPlay() {
     let warning = document.querySelector('.warning-js');
-    if (isPlaying === false){
+    if (!isPlaying){
         autoPlayer = setInterval(() => {
             CheckWinner(Math.random())
         }, 500);
