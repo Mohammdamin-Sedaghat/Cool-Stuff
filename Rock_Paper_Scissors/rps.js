@@ -62,3 +62,19 @@ function resetScore() {
     document.getElementById("gameState").style = "visibility: hidden;"
     document.getElementById("wlt").innerHTML = `Wins: ${score.wC},Losses: ${score.lC},Ties: ${score.tC}`;
 }
+
+let isPlaying = false;
+let autoPlayer;
+function autoPlay() {
+    let warning = document.querySelector('.warning-js');
+    if (isPlaying === false){
+        autoPlayer = setInterval(() => {
+            CheckWinner(Math.random())
+        }, 500);
+        warning.style.visibility = "visible";
+    } else {
+        clearInterval(autoPlayer);
+        warning.style.visibility = "hidden";
+    }
+    isPlaying = !isPlaying;
+}
