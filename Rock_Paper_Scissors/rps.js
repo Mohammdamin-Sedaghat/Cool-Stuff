@@ -63,18 +63,20 @@ function resetScore() {
     document.getElementById("wlt").innerHTML = `Wins: ${score.wC},Losses: ${score.lC},Ties: ${score.tC}`;
 }
 
+document.querySelector('.autoPlay-js').addEventListener('click', () => {autoPlay()})
+
 let isPlaying = false;
 let autoPlayer;
 function autoPlay() {
-    let warning = document.querySelector('.warning-js');
+    let autoPlayElem = document.querySelector('.autoPlay-js');
     if (!isPlaying){
         autoPlayer = setInterval(() => {
             CheckWinner(Math.random())
         }, 500);
-        warning.style.visibility = "visible";
+        autoPlayElem.innerHTML = "Stop Playing";
     } else {
         clearInterval(autoPlayer);
-        warning.style.visibility = "hidden";
+        autoPlayElem.innerHTML = "Auto Play";
     }
     isPlaying = !isPlaying;
 }
