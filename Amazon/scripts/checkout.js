@@ -2,7 +2,9 @@ import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 displayCart();
+updateCartQuantity();
 
+//Function to display the cart. 
 function displayCart() {
     let cartSummaryHTML = "";
     cart.forEach((cartItem) => {
@@ -94,10 +96,21 @@ function displayCart() {
     document.querySelector('.order-summary-js').innerHTML = cartSummaryHTML;
 }
 
+//Adding event listeners for the delete buttons. 
 document.querySelectorAll('.delete-js').forEach((link) => {
     link.addEventListener('click', () => {
         const productId = link.dataset.productId;
         removeFromCart(productId);
+        updateCartQuantity();
         document.querySelector(`.js-cart-container-${productId}`).remove();
     });
 });
+
+//function to update cart quantity
+function updateCartQuantity() {
+    let total = 0;
+    cart.forEach((cartItem) => {
+        total += cartItem.quantity;
+    });
+    document.querySelector(".item-count-js").innerHTML = total;
+}
