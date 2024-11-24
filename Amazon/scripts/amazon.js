@@ -59,6 +59,9 @@ products.forEach((product) => {
     `;
 });
 
+//displaying the quantity into the page
+updateCartQuantity();
+
 //Adding an Event Listener for each button. 
 prodcutContainerElem.innerHTML = productsHTML;
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
