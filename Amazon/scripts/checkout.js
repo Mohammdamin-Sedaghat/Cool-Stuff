@@ -112,5 +112,5 @@ function updateCartQuantity() {
     cart.forEach((cartItem) => {
         total += cartItem.quantity;
     });
-    document.querySelector(".item-count-js").innerHTML = total;
+    document.querySelector(".item-count-js").innerHTML = `${total} items`;
 }
