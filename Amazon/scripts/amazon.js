@@ -1,38 +1,34 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import { products } from '../data/products.js';
 
 let prodcutContainerElem = document.querySelector('.products-grid');
 let productsHTML = "";
-let timeOutIntervalId = {
-  productId: 0,
-  timeId: 0,
-};
-products.forEach((item, index) => {
+products.forEach((product) => {
     productsHTML += `
         <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
-              src="${item.image}">
+              src="${product.image}">
           </div>
 
           <div class="product-name limit-text-to-2-lines">
-            ${item.name}
+            ${product.name}
           </div>
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${item.rating.stars * 10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
-              ${item.rating.count}
+              ${product.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${item.priceCents / 100}
+            $${product.priceCents / 100}
           </div>
 
           <div class="product-quantity-container">
-            <select class="js-quantity-selector-${item.id}">
+            <select class="js-quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -48,61 +44,60 @@ products.forEach((item, index) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart added-to-cart-${item.id}">
+          <div class="added-to-cart added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
           <button class="add-to-cart-button button-primary js-add-to-cart" 
-            data-product-id="${item.id}">
+            data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>
     `;
 });
 
+//Adding an Event Listener for each button. 
 prodcutContainerElem.innerHTML = productsHTML;
-document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
         const { productId } = button.dataset;
-        const quantityElem = document.querySelector(`.js-quantity-selector-${productId}`);
-        let isIn = false;
-        cart.forEach((item) => {
-            if (item.productId === productId) {
-                item.quantity += Number(quantityElem.value);
-                isIn = true;
-                return;
-            }
-        });
-
-        if (!isIn) {
-            cart.push({
-                productId,
-                quantity: Number(quantityElem.value)
-            });
-        }
-        updateQuantity();
-        console.log(cart);
-
-        //showing it's added
-        let addedToCartElement = document.querySelector(`.added-to-cart-${productId}`);
-        if (timeOutIntervalId.productId === productId) {
-          clearTimeout(timeOutIntervalId.timeId);
-        }
-        addedToCartElement.style.opacity = '1';
-        let timeId = setTimeout(() => {
-          addedToCartElement.style.opacity = '0';
-        }, 2000);
-        timeOutIntervalId.timeId = timeId;
-        timeOutIntervalId.productId = productId;
+        addToCart(productId);
+        updateCartQuantity();
+        updateAddedText(productId);
     });
 });
 
-function updateQuantity() {
+//constructing a timeIntervalId so that the checkmarks don't dissapear if pressed multiple times. 
+let timeOutIntervalId = {
+  productId: 0,
+  timeId: 0,
+};
+//Displaying the added Checkmark.
+function updateAddedText(productId) {
+  let addedToCartElement = document.querySelector(`.added-to-cart-${productId}`);
+  //making sure that if the user keeps pressing it, it doesn't disapear midway. 
+  if (timeOutIntervalId.productId === productId) {
+    clearTimeout(timeOutIntervalId.timeId);
+  }
+  //actually showing it. 
+  addedToCartElement.style.opacity = '1';
+  //making sure it dissapears after 2 seconds 
+  let timeId = setTimeout(() => {
+    addedToCartElement.style.opacity = '0';
+  }, 2000);
+
+  //updating time interval id. 
+  timeOutIntervalId.timeId = timeId;
+  timeOutIntervalId.productId = productId;
+};
+
+//Function to update the quanity of the cart (top right corner)
+function updateCartQuantity() {
     const quantityElement = document.querySelector('.cart-quantity-js');
     let total = 0;
-    cart.forEach((product) => {
-        total += product.quantity;
+    cart.forEach((cartItem) => {
+        total += cartItem.quantity;
     });
     quantityElement.innerHTML = total;
 }
