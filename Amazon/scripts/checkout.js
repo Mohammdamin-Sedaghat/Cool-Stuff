@@ -1,4 +1,4 @@
-import {cart, removeFromCart} from '../data/cart.js';
+import {cart, removeFromCart, updateQuanitty} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 displayCart();
@@ -34,9 +34,10 @@ function displayCart() {
                 </div>
                 <div class="product-quantity">
                     <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label quantity-label-js-${desiredProduct.id}">${cartItem.quantity}</span>
                     </span>
-                    <span class="update-quantity-link link-primary">
+                    <span class="update-quantity-link link-primary update-quantity-js" 
+                        data-product-id='${desiredProduct.id}'>
                     Update
                     </span>
                     <span class="delete-quantity-link link-primary delete-js" data-product-id="${desiredProduct.id}">
@@ -103,6 +104,26 @@ document.querySelectorAll('.delete-js').forEach((link) => {
         removeFromCart(productId);
         updateCartQuantity();
         document.querySelector(`.js-cart-container-${productId}`).remove();
+    });
+});
+
+document.querySelectorAll('.update-quantity-js').forEach((link) => {
+    link.addEventListener('click', () => {
+        const productId = link.dataset.productId;
+        console.log(productId);
+        const quanittyElem = document.querySelector(`.quantity-label-js-${productId}`);
+        if (link.innerHTML.trim() === 'Update') {
+            link.innerHTML = 'Save';
+            quanittyElem.innerHTML = `
+            <input type="number" class="quantity-input quantity-input-${productId}" value="${quanittyElem.innerHTML}" min='1'>
+            `;
+        } else {
+            link.innerHTML = 'Update';
+            const inputAmnt = document.querySelector(`.quantity-input-${productId}`).value;
+            quanittyElem.innerHTML = `${inputAmnt}`;
+            updateQuanitty(productId, inputAmnt);
+        }
+        // link.innerHTML = link.innerHTML === 'Save' ? 'Update': 'Save';
     });
 });
 

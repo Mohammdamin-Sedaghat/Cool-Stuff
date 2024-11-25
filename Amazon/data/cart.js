@@ -33,3 +33,13 @@ export function removeFromCart(productId) {
 
     saveToStorage();
 }
+
+export function updateQuanitty(productId, amnt) {
+    cart = cart.map((cartItem) => {
+        if (cartItem.productId === productId) {
+            cartItem.quantity = amnt;
+        }
+        return cartItem;
+    });
+    saveToStorage();
+}
