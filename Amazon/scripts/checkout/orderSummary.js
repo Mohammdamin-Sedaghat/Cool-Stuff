@@ -3,10 +3,7 @@ import {products} from '../../data/products.js';
 import {deliveryOptions} from '../../data/deliveryOptions.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-
-export function suck() {
-    console.log('suck my dick');
-}
+import { renderPaymentSymmary } from './paymentSummary.js';
 
 //Function to display the cart. 
 export function renderOrderSummary() {
@@ -116,6 +113,7 @@ updateCartQuantity();
             const value = deliveryLink.value;
             updateDeliveryOptionId(productId, value);
             renderOrderSummary();
+            renderPaymentSymmary();
         });
     });
 
@@ -126,6 +124,7 @@ updateCartQuantity();
             removeFromCart(productId);
             updateCartQuantity();
             document.querySelector(`.js-cart-container-${productId}`).remove();
+            renderPaymentSymmary();
         });
     });
 
@@ -151,6 +150,7 @@ updateCartQuantity();
                 updateQuanitty(productId, Number(inputElem.value));
                 updateCartQuantity();
             }
+            renderPaymentSymmary();
         });
     });
 
