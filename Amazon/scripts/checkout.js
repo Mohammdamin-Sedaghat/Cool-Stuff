@@ -36,7 +36,7 @@ function displayCart() {
                     <span>
                     Quantity: <span class="quantity-label quantity-label-js-${desiredProduct.id}">${cartItem.quantity}</span>
                     </span>
-                    <span class="update-quantity-link link-primary update-quantity-js" 
+                    <span class="update-quantity-link link-primary update-quantity-js update-product-id-${desiredProduct.id}" 
                         data-product-id='${desiredProduct.id}'>
                     Update
                     </span>
@@ -107,21 +107,27 @@ document.querySelectorAll('.delete-js').forEach((link) => {
     });
 });
 
+//Adding event listeners fro the update button. 
 document.querySelectorAll('.update-quantity-js').forEach((link) => {
     link.addEventListener('click', () => {
         const productId = link.dataset.productId;
-        console.log(productId);
         const quanittyElem = document.querySelector(`.quantity-label-js-${productId}`);
         if (link.innerHTML.trim() === 'Update') {
             link.innerHTML = 'Save';
             quanittyElem.innerHTML = `
             <input type="number" class="quantity-input quantity-input-${productId}" value="${quanittyElem.innerHTML}" min='1'>
             `;
+            document.querySelector(`.quantity-input-${productId}`).addEventListener('keydown', (myEvent) => {
+                if (myEvent.key === 'Enter') {
+                    document.querySelector(`.update-product-id-${productId}`).click();
+                }
+            })
         } else {
             link.innerHTML = 'Update';
-            const inputAmnt = document.querySelector(`.quantity-input-${productId}`).value;
-            quanittyElem.innerHTML = `${inputAmnt}`;
-            updateQuanitty(productId, inputAmnt);
+            const inputElem = document.querySelector(`.quantity-input-${productId}`);
+            quanittyElem.innerHTML = `${inputElem.value}`;
+            updateQuanitty(productId, Number(inputElem.value));
+            updateCartQuantity();
         }
         // link.innerHTML = link.innerHTML === 'Save' ? 'Update': 'Save';
     });
