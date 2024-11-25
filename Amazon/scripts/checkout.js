@@ -66,6 +66,7 @@ function displayCart() {
     document.querySelector('.order-summary-js').innerHTML = cartSummaryHTML;
 }
 
+//function to get the date for a certain number of days in future. 
 function getDate(deliveryOptionId) {
     let deliveryDate;
     deliveryOptions.forEach((deliveryOptionItem)=> {
@@ -76,6 +77,7 @@ function getDate(deliveryOptionId) {
     return deliveryDate
 };
 
+//generating the delivery options
 function delivaryOptionsHTML(productId, wantedId) {
     let totalHTML = "";
     deliveryOptions.forEach((delivaryOption) => {
@@ -105,6 +107,7 @@ function delivaryOptionsHTML(productId, wantedId) {
     return totalHTML;
 }
 
+//adding event listeners for delivery options. 
 document.querySelectorAll('.delivery-option-input').forEach((deliveryLink)=> {
     deliveryLink.addEventListener('click', () => {
         const productId = deliveryLink.name.slice(16);
@@ -113,10 +116,10 @@ document.querySelectorAll('.delivery-option-input').forEach((deliveryLink)=> {
             if (cartItem.productId === productId) {
                 cartItem.delivaryOptionId = value;
                 const deliveryDate = getDate(value);
-                document.querySelector(`.delivery-date-js-${productId}`).innerHTML = `Delivery date: ${deliveryDate}`
+                document.querySelector(`.delivery-date-js-${productId}`).innerHTML = `Delivery date: ${deliveryDate}`;
             }
         });
-        saveToStorage()
+        saveToStorage();
     });
 });
 
