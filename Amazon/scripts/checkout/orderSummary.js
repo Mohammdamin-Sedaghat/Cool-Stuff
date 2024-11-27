@@ -123,7 +123,7 @@ updateCartQuantity();
             const productId = link.dataset.productId;
             removeFromCart(productId);
             updateCartQuantity();
-            document.querySelector(`.js-cart-container-${productId}`).remove();
+            renderOrderSummary();
             renderPaymentSymmary();
         });
     });
