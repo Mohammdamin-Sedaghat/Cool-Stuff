@@ -55,30 +55,59 @@ export function renderPaymentSymmary() {
             <div class="payment-summary-money">$${formatCurrency(totalTax + shippingPriceCents + itemPriceCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary js-place-order">
-            Place your order
-          </button>
+          <div class='paypal-input-container'>
+          Use PayPal <input type='checkbox' class='paypal-input paypal-input-js'>
+          </div>
+          <div class='place-order-container'>
+            <button class="place-order-button button-primary js-place-order">
+              Place your order
+            </button>
+          </div>
         
     `;
     document.querySelector('.js-payment-summary').innerHTML = totalHtml;
 
-    document.querySelector('.js-place-order').addEventListener('click', async ()=>{
-      try {
-        const response = await fetch('https://supersimplebackend.dev/orders', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            cart: cart
-          }),
-        });
+    addEventForPlaceOrder();
 
-        const order  = await response.json();
-        addOrder(order);
-        window.location.href= "orders.html"
-      } catch (error) {
-        console.log(`encountered ${error}`);
+    document.querySelector('.paypal-input-js').addEventListener('change', (event)=>{
+      if (event.target.checked) {
+        document.querySelector('.place-order-container').innerHTML = `
+          <button class="place-order-button button-primary paypal-outer-button">
+            <img src="./images/icons/paypal.svg" class="paypal-button"> 
+          </button>
+          <button class="place-order-button button-primary debit-credit-button">
+            Debit or Credit Card
+          </button>
+        `;
+      } else {
+        document.querySelector('.place-order-container').innerHTML = `
+          <button class="place-order-button button-primary js-place-order">
+            Place your order
+          </button>
+        `;
+        addEventForPlaceOrder();
       }
-    });
+    })
+}
+
+function addEventForPlaceOrder() {
+  document.querySelector('.js-place-order').addEventListener('click', async ()=>{
+    try {
+      const response = await fetch('https://supersimplebackend.dev/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cart: cart
+        }),
+      });
+
+      const order  = await response.json();
+      addOrder(order);
+      window.location.href= "orders.html"
+    } catch (error) {
+      console.log(`encountered ${error}`);
+    }
+  });
 }

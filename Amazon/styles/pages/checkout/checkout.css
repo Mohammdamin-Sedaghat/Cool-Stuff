@@ -210,6 +210,48 @@
   margin-bottom: 15px;
 }
 
+.paypal-input {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: red;
+}
+
+.paypal-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0px;
+}
+
+.paypal-button {
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.paypal-outer-button {
+  height: 40px;
+  border-radius: 2px;
+  margin-bottom: 0px;
+  background-color: #ffc439;
+}
+
+.debit-credit-button {
+  background-color: rgb(23, 23, 23);
+  color: white;
+  font-size: 18px;
+  border-color: black;
+  border-radius: 4px;
+  font-weight: 100;
+}
+
+.debit-credit-button:hover {
+  background-color: black;
+  border-color: black;
+}
+
 .quantity-input {
   width: 40px;
 }
