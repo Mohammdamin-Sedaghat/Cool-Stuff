@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSymmary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProductsFetch } from "../data/products.js";
 
 /*
 new Promise((resolve) => {
@@ -12,7 +12,7 @@ new Promise((resolve) => {
 })
 */
 
-loadProducts(renderCheckOutPage);
+loadProductsFetch().then(() => {renderCheckOutPage()});
 
 function renderCheckOutPage() {
     renderPaymentSymmary();
