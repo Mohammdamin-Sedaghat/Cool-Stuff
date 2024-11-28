@@ -739,3 +739,13 @@ export function loadProducts(func) {
 
   console.log('load Products')
 }
+
+export function findMatch(productId) {
+  let match;
+  products.forEach((product)=>{
+    if (productId === product.id) {
+      match = product;
+    }
+  });
+  return match
+}

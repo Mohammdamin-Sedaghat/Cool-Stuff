@@ -1,64 +1,80 @@
 import {orders} from '../data/orders.js';
+import {makeTimeBetter} from './utils/day.js';
+import { formatCurrency } from './utils/money.js';
+import { findMatch, loadProductsFetch } from '../data/products.js';
 
-let totalHTML = "";
-orders.forEach((orderItem)=>{
-    console.log(orderItem.orderTime)
-    totalHTML += `
-        <div class="order-header">
-            <div class="order-header-left-section">
-                <div class="order-date">
-                <div class="order-header-label">Order Placed:</div>
-                <div>August 12</div>
+OrderPage();
+
+async function OrderPage() {
+    await loadProductsFetch();
+    renderOrderPage();
+}
+
+function renderOrderPage() {
+    let totalHTML = "";
+    orders.forEach((orderItem)=>{
+        //console.log(orderItem)
+        totalHTML += `
+            <div class="order-container">
+            <div class="order-header">
+                <div class="order-header-left-section">
+                    <div class="order-date">
+                    <div class="order-header-label">Order Placed:</div>
+                    <div>${makeTimeBetter(orderItem.orderTime)}</div>
+                    </div>
+                    <div class="order-total">
+                    <div class="order-header-label">Total:</div>
+                    <div>${formatCurrency(orderItem.totalCostCents)}</div>
+                    </div>
                 </div>
-                <div class="order-total">
-                <div class="order-header-label">Total:</div>
-                <div>$35.06</div>
+
+                <div class="order-header-right-section">
+                    <div class="order-header-label">Order ID:</div>
+                    <div>${orderItem.id}</div>
                 </div>
             </div>
+            <div class="order-details-grid">
+        `
+        orderItem.products.forEach((orderedProduct) => {
+            const matchingProduct = findMatch(orderedProduct.productId);
+            //console.log(matchingProduct);
+            console.log(orderedProduct);
+            totalHTML += `
+                <div class="product-image-container">
+                <img src=${matchingProduct.image}>
+                </div>
 
-            <div class="order-header-right-section">
-                <div class="order-header-label">Order ID:</div>
-                <div>27cba69d-4c3d-4098-b42d-ac7fa62b7664</div>
+                <div class="product-details">
+                <div class="product-name">
+                ${matchingProduct.name}
+                </div>
+                <div class="product-delivery-date">
+                    Arriving on: ${makeTimeBetter(orderedProduct.estimatedDeliveryTime)}
+                </div>
+                <div class="product-quantity">
+                    Quantity: ${orderedProduct.quantity}
+                </div>
+                <button class="buy-again-button button-primary">
+                    <img class="buy-again-icon" src="images/icons/buy-again.png">
+                    <span class="buy-again-message">Buy it again</span>
+                </button>
+                </div>
+
+                <div class="product-actions">
+                <a href="tracking.html">
+                    <button class="track-package-button button-secondary">
+                    Track package
+                    </button>
+                </a>
+                </div>
+            `
+        });
+
+        totalHTML += `
             </div>
         </div>
-        <div class="order-details-grid">
-    `
-    orderItem.products.forEach((orderedProduct) => {
-        totalHTML += `
-            <div class="product-image-container">
-              <img src="images/products/athletic-cotton-socks-6-pairs.jpg">
-            </div>
-
-            <div class="product-details">
-              <div class="product-name">
-                Black and Gray Athletic Cotton Socks - 6 Pairs
-              </div>
-              <div class="product-delivery-date">
-                Arriving on: August 15
-              </div>
-              <div class="product-quantity">
-                Quantity: 1
-              </div>
-              <button class="buy-again-button button-primary">
-                <img class="buy-again-icon" src="images/icons/buy-again.png">
-                <span class="buy-again-message">Buy it again</span>
-              </button>
-            </div>
-
-            <div class="product-actions">
-              <a href="tracking.html">
-                <button class="track-package-button button-secondary">
-                  Track package
-                </button>
-              </a>
-            </div>
         `
     });
 
-    totalHTML += `
-        </div>
-    </div>
-    `
-});
-
-document.querySelector('.orders-grid-js').innerHTML = totalHTML;
+    document.querySelector('.orders-grid-js').innerHTML = totalHTML;
+}
