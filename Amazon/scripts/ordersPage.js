@@ -2,6 +2,7 @@ import {orders} from '../data/orders.js';
 import {makeTimeBetter} from './utils/day.js';
 import { formatCurrency } from './utils/money.js';
 import { findMatch, loadProductsFetch } from '../data/products.js';
+import { addToCart, updateCartQuantityHTML } from '../data/cart.js';
 
 OrderPage();
 
@@ -13,7 +14,6 @@ async function OrderPage() {
 function renderOrderPage() {
     let totalHTML = "";
     orders.forEach((orderItem)=>{
-        //console.log(orderItem)
         totalHTML += `
             <div class="order-container">
             <div class="order-header">
@@ -38,7 +38,7 @@ function renderOrderPage() {
         orderItem.products.forEach((orderedProduct) => {
             const matchingProduct = findMatch(orderedProduct.productId);
             //console.log(matchingProduct);
-            console.log(orderedProduct);
+            //console.log(orderedProduct);
             totalHTML += `
                 <div class="product-image-container">
                 <img src=${matchingProduct.image}>
@@ -49,19 +49,19 @@ function renderOrderPage() {
                 ${matchingProduct.name}
                 </div>
                 <div class="product-delivery-date">
-                    Arriving on: ${makeTimeBetter(orderedProduct.estimatedDeliveryTime)}
+                    Arriving on: ${orderedProduct.estimatedDeliveryTime}
                 </div>
                 <div class="product-quantity">
                     Quantity: ${orderedProduct.quantity}
                 </div>
-                <button class="buy-again-button button-primary">
+                <button class="buy-again-button button-primary buy-again-js" data-product-id="${matchingProduct.id}">
                     <img class="buy-again-icon" src="images/icons/buy-again.png">
                     <span class="buy-again-message">Buy it again</span>
                 </button>
                 </div>
 
                 <div class="product-actions">
-                <a href="tracking.html">
+                <a href="tracking.html?productId:${matchingProduct.id}&orderId:${orderItem.id}">
                     <button class="track-package-button button-secondary">
                     Track package
                     </button>
@@ -77,4 +77,14 @@ function renderOrderPage() {
     });
 
     document.querySelector('.orders-grid-js').innerHTML = totalHTML;
+
+    updateCartQuantityHTML();
+
+    document.querySelectorAll('.buy-again-js').forEach((button) => {
+        button.addEventListener('click', () => {
+            const productId = button.dataset.productId;
+            addToCart(productId, 1);
+            updateCartQuantityHTML();
+        });
+    });
 }

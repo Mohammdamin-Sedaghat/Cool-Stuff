@@ -1,4 +1,4 @@
-import {cart, addToCart} from '../data/cart.js';
+import {cart, addToCart, updateCartQuantityHTML} from '../data/cart.js';
 import { products, loadProductsFetch } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -69,15 +69,16 @@ function renderProductsGrid() {
   });
 
   //displaying the quantity into the page
-  updateCartQuantity();
+  updateCartQuantityHTML();
 
   //Adding an Event Listener for each button. 
   prodcutContainerElem.innerHTML = productsHTML;
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       button.addEventListener('click', () => {
           const { productId } = button.dataset;
-          addToCart(productId);
-          updateCartQuantity();
+          const quantityElem = document.querySelector(`.js-quantity-selector-${productId}`);
+          addToCart(productId, quantityElem.value);
+          updateCartQuantityHTML();
           updateAddedText(productId);
       });
   });
@@ -105,15 +106,5 @@ function renderProductsGrid() {
     timeOutIntervalId.timeId = timeId;
     timeOutIntervalId.productId = productId;
   };
-
-  //Function to update the quanity of the cart (top right corner)
-  function updateCartQuantity() {
-      const quantityElement = document.querySelector('.cart-quantity-js');
-      let total = 0;
-      cart.forEach((cartItem) => {
-          total += cartItem.quantity;
-      });
-      quantityElement.innerHTML = total;
-  }
 
 }
