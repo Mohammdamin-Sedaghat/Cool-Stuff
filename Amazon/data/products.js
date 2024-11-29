@@ -720,26 +720,6 @@ export function loadProductsFetch() {
 
 export let products = [];
 
-export function loadProducts(func) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.addEventListener('load', () => {
-    products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === 'clothing') {
-        return new Clothing(productDetails);
-      }
-      return new Product(productDetails)
-    });
-
-    func();
-  });
-
-  xhr.open('GET', 'https://supersimplebackend.dev/products');
-  xhr.send();
-
-  console.log('load Products')
-}
-
 export function findMatch(productId) {
   let match;
   products.forEach((product)=>{

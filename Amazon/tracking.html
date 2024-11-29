@@ -45,7 +45,7 @@
 
         <a class="cart-link header-link" href="checkout.html">
           <img class="cart-icon" src="images/icons/cart-icon.png">
-          <div class="cart-quantity">3</div>
+          <div class="cart-quantity cart-quantity-js"></div>
           <div class="cart-text">Cart</div>
         </a>
       </div>
@@ -57,42 +57,26 @@
           View all orders
         </a>
 
-        <div class="delivery-date">
-          Arriving on Monday, June 13
-        </div>
-
-        <div class="product-info">
-          Black and Gray Athletic Cotton Socks - 6 Pairs
-        </div>
-
-        <div class="product-info">
-          Quantity: 1
-        </div>
-
-        <img class="product-image" src="images/products/athletic-cotton-socks-6-pairs.jpg">
+        <div class="product-details"></div>
 
         <div class="progress-labels-container">
-          <div class="progress-label">
+          <div class="progress-label preparing-label-js">
             Preparing
           </div>
-          <div class="progress-label current-status">
+          <div class="progress-label shipped-label-js">
             Shipped
           </div>
-          <div class="progress-label">
+          <div class="progress-label delivered-label-js">
             Delivered
           </div>
         </div>
 
         <div class="progress-bar-container">
-          <div class="progress-bar"></div>
+          <div class="progress-bar progress-bar-js"></div>
         </div>
       </div>
     </div>
 
-    <script>
-      const url = new URL(window.location.href);
-      console.log(url.searchParams.get('orderId'));
-      
-    </script>
+    <script src="./scripts/tracking.js" type="module"></script>
   </body>
 </html>

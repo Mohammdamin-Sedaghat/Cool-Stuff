@@ -49,7 +49,7 @@ function renderOrderPage() {
                 ${matchingProduct.name}
                 </div>
                 <div class="product-delivery-date">
-                    Arriving on: ${orderedProduct.estimatedDeliveryTime}
+                    Arriving on: ${makeTimeBetter(orderedProduct.estimatedDeliveryTime)}
                 </div>
                 <div class="product-quantity">
                     Quantity: ${orderedProduct.quantity}
@@ -61,7 +61,7 @@ function renderOrderPage() {
                 </div>
 
                 <div class="product-actions">
-                <a href="tracking.html?productId:${matchingProduct.id}&orderId:${orderItem.id}">
+                <a href="tracking.html?productId=${matchingProduct.id}&orderId=${orderItem.id}">
                     <button class="track-package-button button-secondary">
                     Track package
                     </button>

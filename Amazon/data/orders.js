@@ -8,7 +8,7 @@ export function addOrder(order) {
     order.products.forEach((product, index) => {
         const matchingItem = matchingDeliveryOption(cart.at(index).delivaryOptionId);
         const today = dayjs();
-        const delivaryDay = today.add(matchingItem.deliveryDays, 'days').format('MMMM D');
+        const delivaryDay = today.add(matchingItem.deliveryDays, 'days');
         product.estimatedDeliveryTime = delivaryDay;
     })
     orders.unshift(order);
@@ -18,4 +18,14 @@ export function addOrder(order) {
 
 function saveToStorage() {
     localStorage.setItem('orders', JSON.stringify(orders))
+}
+
+export function locateOrder(orderId) {
+    let matchingOrder;
+    orders.forEach((order)=> {
+        if (orderId === order.id) {
+            matchingOrder = order;
+        }
+    });
+    return matchingOrder
 }
