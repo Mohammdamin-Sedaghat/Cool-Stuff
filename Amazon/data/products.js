@@ -729,3 +729,28 @@ export function findMatch(productId) {
   });
   return match
 }
+
+export function searchEngine() {
+  const value = document.querySelector('.search-bar-js').value.toLowerCase();
+  const results = [[], []]
+  console.log('start');
+  products.forEach((product) => {
+    const productName = product.name.toLowerCase();
+    const productNameList = productName.split(" ");
+    if (value == productName){
+      results[0].push(product)
+      return ;
+    }
+    
+    for (let i = 0; i <= productNameList.length; i++) {
+      if (productNameList[i] == value) {
+        results[1].push(product);
+        break;
+      }
+    }
+
+
+  });
+
+  console.log(results);
+}

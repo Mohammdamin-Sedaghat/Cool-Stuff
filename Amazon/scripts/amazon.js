@@ -1,17 +1,20 @@
-import {cart, addToCart, updateCartQuantityHTML} from '../data/cart.js';
-import { products, loadProductsFetch } from '../data/products.js';
+import {addToCart, updateCartQuantityHTML} from '../data/cart.js';
+import { products, loadProductsFetch, searchEngine } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 loadProductsFetch().then(()=>{
   renderProductsGrid();
 });
 
-function renderProductsGrid() {
+function renderProductsGrid(desiredProducts = []) {
+  if (desiredProducts.length === 0) {
+    desiredProducts = products;
+  }
 
   //displaying the products into the page
   let prodcutContainerElem = document.querySelector('.products-grid');
   let productsHTML = "";
-  products.forEach((product) => {
+  desiredProducts.forEach((product) => {
       productsHTML += `
           <div class="product-container">
             <div class="product-image-container">
@@ -106,5 +109,11 @@ function renderProductsGrid() {
     timeOutIntervalId.timeId = timeId;
     timeOutIntervalId.productId = productId;
   };
+
+  document.querySelector('.search-bar-js').addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+      searchEngine();
+    }
+  })
 
 }
