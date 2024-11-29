@@ -4,6 +4,7 @@ class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -11,6 +12,7 @@ class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   extraInfoHTML(){
@@ -731,26 +733,55 @@ export function findMatch(productId) {
 }
 
 export function searchEngine() {
-  const value = document.querySelector('.search-bar-js').value.toLowerCase();
-  const results = [[], []]
-  console.log('start');
+  const phraseList = document.querySelector('.search-bar-js').value.toLowerCase().split(" ");
+  let results = []
+  let value;
+  console.log('start')
   products.forEach((product) => {
-    const productName = product.name.toLowerCase();
-    const productNameList = productName.split(" ");
-    if (value == productName){
-      results[0].push(product)
-      return ;
-    }
-    
-    for (let i = 0; i <= productNameList.length; i++) {
-      if (productNameList[i] == value) {
-        results[1].push(product);
-        break;
+    value = 0;
+    const productNameList = product.name.toLowerCase().split(" ");
+    productNameList.forEach((word) => {
+      if (phraseList.includes(word)) {
+        value ++;
       }
+    });
+
+    if (value > 0) {
+      insert(results, product.name, value);
     }
-
-
   });
 
-  console.log(results);
+  results = results.map((product) => {
+    return product.item;
+  });
+
+  console.log(products[2]);
+}
+
+function insert(prevList, item, value) {
+  if (prevList.length === 0) {
+    prevList.push({
+      item,
+      value,
+    });
+    return;
+  }
+  let l = 0;
+  let r = prevList.length - 1
+  let m;
+  while (l <= r) {
+    m = Math.floor((l + r) / 2);
+    
+    if (prevList[m].value === value) {
+      prevList.splice(m+1, 0, {item, value})
+      break;
+    } else if (prevList[m].value > value) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  if (l !== r) {
+    prevList.splice(m, 0, {item, value});
+  }
 }
