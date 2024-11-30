@@ -1,9 +1,0 @@
-<svg fill="none" viewbox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-    <style>
-        circle {
-            fill: red;
-            stroke: blue;
-        }
-    </style>
-    <circle cx="250", cy="150", r="100" />
-</svg>

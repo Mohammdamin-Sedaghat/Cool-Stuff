@@ -1,15 +1,16 @@
-<h1>Amazon Replica Project</h1>
+<h2>Amazon Replica Project</h2>
 
-In this project, I decided to replicate amazon fully only using Javascript HTML and CSS. 
+In this project, I set out to replicate Amazon's functionality using only JavaScript, HTML, and CSS. 
 
-It was definetly fun working on it.
+Working on this project was a truly enjoyable experience!
 
-Here are some pictures of the product. 
+Below are some screenshots showcasing the project:
 
-<img src="/Amazon/readme.svg">
-<!-- <div>
-    <img src="/Amazon/images/first-page-view.png" alt="landing-page-view">
-    <img src="/Amazon/images/checkout-page-view.png" alt="checkout-page-view">
-    <img src="/Amazon/images/orders-page-view.png" alt="ordrs-page-view">
-    <img src="/Amazon/images/tracking.png" alt="tracking-page-view">
-</div> -->
+<div>
+    <img src="./images/first-page-view.png" alt="Landing Page View">
+    <img src="./images/checkout-page-view.png" alt="Checkout Page View">
+    <img src="./images/orders-page-view.png" alt="Orders Page View">
+    <img src="./images/tracking.png" alt="Tracking Page View">
+</div>
+<br>
+To try out the project, simply download the files and open one of the HTML files in your preferred browser. For the best experience, I recommend using VS Code with the Live Server extension, but feel free to use any method you like!
