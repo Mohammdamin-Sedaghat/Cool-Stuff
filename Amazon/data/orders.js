@@ -10,7 +10,7 @@ export function addOrder(order) {
         const today = dayjs();
         const delivaryDay = today.add(matchingItem.deliveryDays, 'days');
         product.estimatedDeliveryTime = delivaryDay;
-    })
+    });
     orders.unshift(order);
 
     saveToStorage();

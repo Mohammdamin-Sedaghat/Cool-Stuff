@@ -48,6 +48,18 @@ function renderTrackingPage() {
     } else if (progressPercentage <= 90) {
         document.querySelector('.shipped-label-js').classList.add('current-status');
     } else {
-        document.querySelector('.delivered-label-js')
+        document.querySelector('.delivered-label-js').classList.add('current-status');
     }
+
+    document.querySelector('.search-bar-js').addEventListener('keydown', (event) => {
+        if (event.key === "Enter") {
+            const phrase = document.querySelector('.search-bar-js').value;
+            window.location.href = `amazon.html?searchQuery=${phrase}`
+        }
+    });
+    
+    document.querySelector('.search-icon-js').addEventListener('click', () => {
+        const phrase = document.querySelector('.search-bar-js').value;
+        window.location.href = `amazon.html?searchQuery=${phrase}`
+    });
 }

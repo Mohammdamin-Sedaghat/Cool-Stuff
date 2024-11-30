@@ -10,12 +10,17 @@ function renderProductsGrid(desiredProducts) {
   let prodcutContainerElem = document.querySelector('.products-grid');
   let productsHTML = "";
 
-  if (desiredProducts === undefined) {
-    desiredProducts = products;
-  } else if (desiredProducts.length === 0) {
-    prodcutContainerElem.innerHTML = "No products matched your search!"
-    return;
+  const url = new URL(window.location.href);
+  const serachQuery = url.searchParams.get('searchQuery');
+
+  if (serachQuery === null) {
+   desiredProducts = products;
+  } else {
+    document.querySelector('.search-bar-js').value = serachQuery;
+    desiredProducts = searchEngine(serachQuery);
+
   }
+
 
   //displaying the products into the page
   desiredProducts.forEach((product) => {
@@ -80,6 +85,9 @@ function renderProductsGrid(desiredProducts) {
 
   //Adding an Event Listener for each button. 
   prodcutContainerElem.innerHTML = productsHTML;
+  if (desiredProducts.length === 0) {
+    prodcutContainerElem.innerHTML = "No products matched your search!"
+  }
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
       button.addEventListener('click', () => {
           const { productId } = button.dataset;
@@ -116,12 +124,13 @@ function renderProductsGrid(desiredProducts) {
 
   document.querySelector('.search-bar-js').addEventListener('keydown', (event) => {
     if (event.key === "Enter") {
-      renderProductsGrid(searchEngine());
+      const phrase = document.querySelector('.search-bar-js').value;
+      window.location.href = `amazon.html?searchQuery=${phrase}`
     }
   });
 
   document.querySelector('.search-icon-js').addEventListener('click', () => {
-    renderProductsGrid(searchEngine());
+    const phrase = document.querySelector('.search-bar-js').value;
+    window.location.href = `amazon.html?searchQuery=${phrase}`
   });
-
 }

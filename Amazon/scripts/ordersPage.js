@@ -82,4 +82,16 @@ function renderOrderPage() {
             document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
         });
     });
+
+    document.querySelector('.search-bar-js').addEventListener('keydown', (event) => {
+        if (event.key === "Enter") {
+            const phrase = document.querySelector('.search-bar-js').value;
+            window.location.href = `amazon.html?searchQuery=${phrase}`
+        }
+    });
+    
+    document.querySelector('.search-icon-js').addEventListener('click', () => {
+        const phrase = document.querySelector('.search-bar-js').value;
+        window.location.href = `amazon.html?searchQuery=${phrase}`
+    });
 }

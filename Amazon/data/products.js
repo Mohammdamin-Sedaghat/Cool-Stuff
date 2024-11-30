@@ -65,9 +65,9 @@ export function findMatch(productId) {
   return match
 }
 
-export function searchEngine() {
-  const phraseList = document.querySelector('.search-bar-js').value.toLowerCase().split(" ");
-  if (document.querySelector('.search-bar-js').value === '') {
+export function searchEngine(phrase) {
+  const phraseList = phrase.toLowerCase().split(" ");
+  if (phrase === '') {
     return undefined;
   }
 
