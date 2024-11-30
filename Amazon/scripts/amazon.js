@@ -6,14 +6,18 @@ loadProductsFetch().then(()=>{
   renderProductsGrid();
 });
 
-function renderProductsGrid(desiredProducts = []) {
-  if (desiredProducts.length === 0) {
+export function renderProductsGrid(desiredProducts) {
+  let prodcutContainerElem = document.querySelector('.products-grid');
+  let productsHTML = "";
+
+  if (desiredProducts === undefined) {
     desiredProducts = products;
+  } else if (desiredProducts.length === 0) {
+    prodcutContainerElem.innerHTML = "No products matched your search!"
+    return;
   }
 
   //displaying the products into the page
-  let prodcutContainerElem = document.querySelector('.products-grid');
-  let productsHTML = "";
   desiredProducts.forEach((product) => {
       productsHTML += `
           <div class="product-container">

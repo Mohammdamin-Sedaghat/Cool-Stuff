@@ -1,3 +1,5 @@
+import { renderProductsGrid } from "../scripts/amazon.js";
+
 class Product {
   id;
   image;
@@ -734,54 +736,50 @@ export function findMatch(productId) {
 
 export function searchEngine() {
   const phraseList = document.querySelector('.search-bar-js').value.toLowerCase().split(" ");
+  if (phraseList.length === 0) {
+    renderProductsGrid();
+    return;
+  }
+
   let results = []
-  let value;
-  console.log('start')
   products.forEach((product) => {
-    value = 0;
-    const productNameList = product.name.toLowerCase().split(" ");
-    productNameList.forEach((word) => {
-      if (phraseList.includes(word)) {
-        value ++;
+    let value = 0;
+    let fullKeyWord;
+    product.keywords.forEach((word) => {
+      fullKeyWord += `${word.toLowerCase()} `;
+    });
+    const productName = product.name.toLowerCase();
+
+    phraseList.forEach((word) => {
+      if (productName.includes(word)) {
+        value++;
+      }
+      if (fullKeyWord.includes(word)) {
+        value++;
       }
     });
+    
 
     if (value > 0) {
-      insert(results, product.name, value);
+      insert(results, product, value);
     }
   });
 
   results = results.map((product) => {
     return product.item;
   });
-
-  console.log(products[2]);
+  renderProductsGrid(results.slice(0,20));
 }
 
 function insert(prevList, item, value) {
-  if (prevList.length === 0) {
-    prevList.push({
-      item,
-      value,
-    });
-    return;
-  }
-  let l = 0;
-  let r = prevList.length - 1
-  let m;
-  while (l <= r) {
-    m = Math.floor((l + r) / 2);
-    
-    if (prevList[m].value === value) {
-      prevList.splice(m+1, 0, {item, value})
+  let total = prevList.length;
+  let cur = 0;
+
+  while (cur < total) {
+    if (prevList[cur].value < value) {
       break;
-    } else if (prevList[m].value > value) {
-      l = m + 1;
-    } else {
-      r = m - 1;
     }
+    cur++;
   }
-  if (l !== r) {
-    prevList.splice(m, 0, {item, value});
-  }
+  prevList.splice(cur, 0, {item, value});
 }
