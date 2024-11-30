@@ -3,13 +3,9 @@ import { findMatch, loadProductsFetch } from "../data/products.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { updateCartQuantityHTML } from "../data/cart.js";
 
-overAllRender();
-
-async function overAllRender() {
-    await loadProductsFetch();
-
+loadProductsFetch().then(()=> {
     renderTrackingPage();
-}
+})
 
 function renderTrackingPage() {
     const url = new URL(window.location.href);
@@ -40,7 +36,7 @@ function renderTrackingPage() {
         <img class="product-image" src=${matchingProduct.image}>
     `;
 
-    updateCartQuantityHTML();
+    document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
 
     const totalTime = dayjs(productDetailInOrder.estimatedDeliveryTime) - dayjs(matchingOrder.orderTime);
     const timePassed = dayjs() - dayjs(matchingOrder.orderTime);

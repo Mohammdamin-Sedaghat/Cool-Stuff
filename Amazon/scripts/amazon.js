@@ -6,7 +6,7 @@ loadProductsFetch().then(()=>{
   renderProductsGrid();
 });
 
-export function renderProductsGrid(desiredProducts) {
+function renderProductsGrid(desiredProducts) {
   let prodcutContainerElem = document.querySelector('.products-grid');
   let productsHTML = "";
 
@@ -76,7 +76,7 @@ export function renderProductsGrid(desiredProducts) {
   });
 
   //displaying the quantity into the page
-  updateCartQuantityHTML();
+  document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
 
   //Adding an Event Listener for each button. 
   prodcutContainerElem.innerHTML = productsHTML;
@@ -85,7 +85,7 @@ export function renderProductsGrid(desiredProducts) {
           const { productId } = button.dataset;
           const quantityElem = document.querySelector(`.js-quantity-selector-${productId}`);
           addToCart(productId, quantityElem.value);
-          updateCartQuantityHTML();
+          document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
           updateAddedText(productId);
       });
   });
@@ -116,8 +116,12 @@ export function renderProductsGrid(desiredProducts) {
 
   document.querySelector('.search-bar-js').addEventListener('keydown', (event) => {
     if (event.key === "Enter") {
-      searchEngine();
+      renderProductsGrid(searchEngine());
     }
-  })
+  });
+
+  document.querySelector('.search-icon-js').addEventListener('click', () => {
+    renderProductsGrid(searchEngine());
+  });
 
 }

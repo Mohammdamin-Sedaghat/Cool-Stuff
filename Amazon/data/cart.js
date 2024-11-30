@@ -56,10 +56,9 @@ export function updateDeliveryOptionId(productId, value) {
 
 //Function to update the quanity of the cart (top right corner)
 export function updateCartQuantityHTML() {
-    const quantityElement = document.querySelector('.cart-quantity-js');
     let total = 0;
     cart.forEach((cartItem) => {
         total += cartItem.quantity;
     });
-    quantityElement.innerHTML = total;
+    return total;
 }

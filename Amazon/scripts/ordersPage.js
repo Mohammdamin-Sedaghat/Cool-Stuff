@@ -4,12 +4,9 @@ import { formatCurrency } from './utils/money.js';
 import { findMatch, loadProductsFetch } from '../data/products.js';
 import { addToCart, updateCartQuantityHTML } from '../data/cart.js';
 
-OrderPage();
-
-async function OrderPage() {
-    await loadProductsFetch();
+loadProductsFetch().then(()=>{
     renderOrderPage();
-}
+});
 
 function renderOrderPage() {
     let totalHTML = "";
@@ -37,8 +34,6 @@ function renderOrderPage() {
         `
         orderItem.products.forEach((orderedProduct) => {
             const matchingProduct = findMatch(orderedProduct.productId);
-            //console.log(matchingProduct);
-            //console.log(orderedProduct);
             totalHTML += `
                 <div class="product-image-container">
                 <img src=${matchingProduct.image}>
@@ -78,13 +73,13 @@ function renderOrderPage() {
 
     document.querySelector('.orders-grid-js').innerHTML = totalHTML;
 
-    updateCartQuantityHTML();
+    document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
 
     document.querySelectorAll('.buy-again-js').forEach((button) => {
         button.addEventListener('click', () => {
             const productId = button.dataset.productId;
             addToCart(productId, 1);
-            updateCartQuantityHTML();
+            document.querySelector('.cart-quantity-js').innerHTML = updateCartQuantityHTML();
         });
     });
 }
