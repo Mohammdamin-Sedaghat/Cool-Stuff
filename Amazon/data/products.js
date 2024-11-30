@@ -736,7 +736,7 @@ export function findMatch(productId) {
 
 export function searchEngine() {
   const phraseList = document.querySelector('.search-bar-js').value.toLowerCase().split(" ");
-  if (phraseList.length === 0) {
+  if (document.querySelector('.search-bar-js').value === '') {
     renderProductsGrid();
     return;
   }
