@@ -7,9 +7,9 @@ It was definetly fun working on it.
 Here are some pictures of the product. 
 
 <img src="/Amazon/readme.svg">
-<div>
+<!-- <div>
     <img src="/Amazon/images/first-page-view.png" alt="landing-page-view">
     <img src="/Amazon/images/checkout-page-view.png" alt="checkout-page-view">
     <img src="/Amazon/images/orders-page-view.png" alt="ordrs-page-view">
     <img src="/Amazon/images/tracking.png" alt="tracking-page-view">
-</div>
+</div> -->
