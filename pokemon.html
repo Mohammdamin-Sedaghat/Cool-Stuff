@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas-id {
+            border: 1px solid black;    
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="canvas-id" width="300" height="300">canvas item</canvas>
+    <script>
+        const item = document.querySelector('#canvas-id');
+        const ctx = item.getContext('2d');
+        ctx.beginPath();
+        //outer layer
+        roundedRect(50, 50, 200, 200, 10);
+        roundedRect(60, 60, 180, 180, 10);
+
+        //the obstecels
+        roundedRect(80, 110, 40, 60, 8);
+        roundedRect(175, 180, 50, 40, 6);
+        roundedRect(200, 70, 30, 70, 6);
+        ctx.stroke();
+
+        //pokemon itself.
+        ctx.beginPath();
+        ctx.moveTo(75, 83);
+        ctx.arc(83, 83, 16, (Math.PI/180)*30, -(Math.PI/180)*30);
+        ctx.closePath();
+        ctx.fill();
+
+        //the fruits
+        const locations = [{
+            x: 103,
+            y: 80,
+        }];
+
+        //first horizantal line
+        for (let x=103; x <= 180; x+= 16) {
+            locations.push({
+                x,
+                y: 80,
+            })
+        }
+
+        //vertical line
+        for (let y=96; y <= 200; y+= 16) {
+            locations.push({
+                x: 151,
+                y,
+            })
+        }
+
+        //second horizantal line
+        for (let x=71; x <= 160; x+= 16) {
+            locations.push({
+                x,
+                y: 207,
+            })
+        }
+
+        //displaying the fruits.
+        locations.forEach((location)=>{
+            ctx.fillRect(location.x, location.y, 6, 6);
+        });
+        
+
+        
+        function roundedRect(x, y, width, height, radius){ 
+            ctx.moveTo(x, y+radius);
+            ctx.arcTo(x, y, x+radius, y, radius);
+            ctx.arcTo(x+width, y, x+width, y+radius, radius);
+            ctx.arcTo(x+width, y+height, x+width - radius, y+height, radius);
+            ctx.arcTo(x, y+height, x, y+height - radius, radius);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
