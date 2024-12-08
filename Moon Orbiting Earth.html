@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas-item" height="300" width="300"></canvas>
+    <script>
+        const item = document.querySelector('#canvas-item');
+        const ctx = item.getContext("2d");
+        ctx.translate(150, 150);
+        let count = 0;
+        let cycleTime = 4000;
+
+        function draw() {
+            const time = new Date();
+            const seconds = 1000 * (time.getSeconds()) + time.getMilliseconds();
+
+            ctx.clearRect(-150, -150, 300, 300);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(-150, -150, 300, 300);
+
+            //sun
+            ctx.fillStyle = 'yellow';
+            ctx.beginPath();
+            ctx.moveTo(30, 0);
+            ctx.arc(0, 0, 40, 0, Math.PI * 2);
+            ctx.fill();
+
+            const earthCenter = {
+                x: 120 * (Math.sin(Math.PI * (seconds / cycleTime))),
+                y: 120 * (Math.cos(Math.PI * (seconds / cycleTime)))
+            }
+            const moonCenter= {
+                x: earthCenter.x + 20 * (Math.sin(Math.PI * (seconds / cycleTime * 0.07))),
+                y: earthCenter.y + 20 * (Math.cos(Math.PI * (seconds / cycleTime * 0.07)))
+            }
+
+            //Orbit
+            ctx.beginPath();
+            ctx.strokeStyle = "lightblue";
+            ctx.moveTo(120, 0);
+            ctx.arc(0, 0, 120, 0, Math.PI *  2);
+            ctx.stroke();
+
+            //earth
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.moveTo(earthCenter.x-10, 150);
+            ctx.arc(earthCenter.x, earthCenter.y, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            //moon
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.moveTo(moonCenter.x +4, 150);
+            ctx.arc(moonCenter.x, moonCenter.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            count++;
+            if (count <= 1500) {
+                window.requestAnimationFrame(draw);
+            }
+        }
+
+        window.requestAnimationFrame(draw);
+
+
+    </script>
+</body>
+</html>
