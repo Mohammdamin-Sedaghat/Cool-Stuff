@@ -1,0 +1,32 @@
+.child {
+    --background-col: red;
+    width: 200px;
+    height: 200px;
+    background-color: var(--background-col);
+
+    border: 1px solid black;
+    border-radius: 4px;
+
+    box-shadow: 2px 3px 6px 2px rgba(94, 94, 94, 0.255);
+
+    flex-grow: 1;
+
+    animation: apear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0 cover 40%;
+}
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@keyframes apear {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    } to {
+        opacity: 1;
+    }
+}
