@@ -1,14 +1,13 @@
 .child {
+    /* Fallback ammounts */
     --background-col: red;
     width: 200px;
-    height: 200px;
-    background-color: var(--background-col);
 
+    background-color: var(--background-col);
+    height: 200px;
     border: 1px solid black;
     border-radius: 4px;
-
     box-shadow: 2px 3px 6px 2px rgba(94, 94, 94, 0.255);
-
     flex-grow: 1;
 
     animation: apear 1s ease-in-out;
