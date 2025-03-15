@@ -1,24 +1,12 @@
 # Side Projects
 
-Here are some of the smaller side projects that I've done. 
+Here are the projects I make in my free time. (~~other than the racket folder, thats just assignments~~)
 
-Here is the breakdown of individual Projects:
-1. **Gregorian-calender** This program, developed in Racket, calculates the day of the week based on any given date. It's a simple yet powerful tool to demonstrate calendar algorithms in functional programming.
+I think there are a few good ones in here like the
 
-2. **Diversity-Toronto** This interactive program highlights the rich cultural mosaic of Toronto. As a visitor in the game, you embark on a journey through the city's vibrant neighborhoods, collecting souvenirs and learning about diverse cultures while overcoming unique challenges. It’s a fun way to explore cultural diversity and geography within the city.
+- [Amazon Clone](https://github.com/Mohammdamin-Sedaghat/Cool-Stuff/tree/main/Amazon): a replicate of Amazon.
+- [Christmas Postcard](https://github.com/Mohammdamin-Sedaghat/Cool-Stuff/tree/main/Chirstmas%20Postcard): Copy the code, and u'll see a cool postcard
+- [Canvas_cool_stuff](https://github.com/Mohammdamin-Sedaghat/Cool-Stuff/tree/main/Canvas%20cool%20stuff): I was messing around here before my [Snake Futuristica]() Project to see what is possible with the Canvas API. I think the best directory is this one because... well Game Development is cool. :EMOJICODE🆒:EMOJICODE😎
+- Many More! 
 
-3. **Chirstmas Postcard** Created with Python’s Pygame library, this postcard demonstrates how simple code can bring beautiful scenes to life. It showcases how Python can be used to design visually appealing and interactive experiences.
-
-4. **War** is a card game. You can see the rules here: [wikipedia.org/War](https://en.wikipedia.org/wiki/War_(card_game)).
-
-5. **Black Jack** is also another famous card game. You will be playing against a computer. Here is the link to the article explaining the game: [wikipedia.org/Black-jack](https://en.wikipedia.org/wiki/Blackjack).
-
-6. **Area Overlap Calculator** This exercise, implemented in Racket, was a rewarding challenge. The task is to calculate the overlapping area between two rectangles defined by the following structure:
-```
-(define-struct box (xmin xmax ymin ymax))
-;;A Box is a (make-box Num Num Num Num)
-;;Recquires:
-;;   xmax >= xmin
-;;   ymax >= ymin
-```
-Before diving into the code, I encourage you to attempt solving the problem yourself!
+Before you dive deep, I suggest wearing a helmet so you don't explode your head from all the stuff here!
